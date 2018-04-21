@@ -10,8 +10,14 @@ Wanted keys edited
 -----------
 11.03.2017
 Pick-item, bug -> Fixed
+-----------
+11.03.2017
 /item vnum, bug -> Fixed
+-----------
+11.03.2017
 GetEmptyInventory -> Fixed
+-----------
+11.03.2017
 IsEmptyItemGrid -> Fixed
 -----------
 13.03.2017
@@ -22,12 +28,17 @@ First key deactivated(vnum:72319)
 -----------
 04.01.2018
 Deleted and changed largest python codes
+-----------
+04.01.2018
 Updated char.cpp
 -----------
 06.01.2018
 char.cpp/char.h/..tables.h/clientmanagerplayer.cpp
+-----------
+06.01.2018
 CPU overload->Fixed
 -----------
+21.04.2018
 Py-side changed->full official
 Deleted->inventorywindow.py
 -----------
