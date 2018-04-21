@@ -1,9 +1,10 @@
 # Metin2-Official-Inventory-Expansion
-Game Version:16.0
-Created by:Blackdragonx61
-Date of First Version: 15.01.2017
+#Game Version:16.0
+#Created by:Blackdragonx61
+#Date of First Version: 15.01.2017
+
 If you see any bug:
-  Skype:blackdragonx61
+#Skype:blackdragonx61
 ####
 10.02.2017
 Wanted keys edited
@@ -42,7 +43,6 @@ CPU overload->Fixed
 Exchange bug fixed
 -----------
 Shared Forums:
-TurkMMO.com/c-c-python
-Metin2DEV
-Elitpvp
-Kori-developer(closed)
+#TurkMMO.com/c-c-python
+#Metin2DEV
+#Elitpvp
