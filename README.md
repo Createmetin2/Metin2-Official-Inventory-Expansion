@@ -39,8 +39,7 @@ char.cpp/char.h/..tables.h/clientmanagerplayer.cpp
 CPU overload->Fixed
 -----------
 21.04.2018
-Py-side changed->full official
-Deleted->inventorywindow.py
+Exchange bug fixed
 -----------
 Shared Forums:
 TurkMMO.com/c-c-python
