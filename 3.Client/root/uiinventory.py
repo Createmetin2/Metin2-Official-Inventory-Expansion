@@ -86,25 +86,9 @@
 			self.OnCloseQuestionDialog()
 			
 		def en_ac(self):
-			envanter = None
-			if player.GetEnvanter() > 17:
-				self.wndPopupDialog = uiCommon.PopupDialog()
-				self.wndPopupDialog.SetText(localeInfo.ENVANTER_ZATEN_GENIS_3)
-				self.wndPopupDialog.Open()
-			elif player.GetEnvanter() < 4:
-				envanter = 2
-			elif player.GetEnvanter() > 3 and player.GetEnvanter() < 6:
-				envanter = 3
-			elif player.GetEnvanter() > 5 and player.GetEnvanter() < 9:
-				envanter = 4
-			elif player.GetEnvanter() > 8 and player.GetEnvanter() < 12:
-				envanter = 5
-			elif player.GetEnvanter() > 11 and player.GetEnvanter() < 15:
-				envanter = 6
-			elif player.GetEnvanter() > 14 and player.GetEnvanter() < 18:
-				envanter = 7
+			needkeys = (2,2,2,2,3,3,4,4,4,5,5,5,6,6,6,7,7,7)
 			self.questionDialog = uiCommon.QuestionDialog()
-			self.questionDialog.SetText(localeInfo.ENVANTER_GENIS_1 % envanter)
+			self.questionDialog.SetText(localeInfo.ENVANTER_GENIS_1 % needkeys[player.GetEnvanter()])
 			self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.genislet))
 			self.questionDialog.SetCancelEvent(ui.__mem_func__(self.OnCloseQuestionDialog))
 			self.questionDialog.Open()
@@ -127,26 +111,4 @@
 #Add
 		if app.ENABLE_EXTEND_INVEN_SYSTEM:
 			if ItemVNum == 72320:
-				envanter = None
-				if player.GetEnvanter() > 17:
-					self.wndPopupDialog = uiCommon.PopupDialog()
-					self.wndPopupDialog.SetText(localeInfo.ENVANTER_ZATEN_GENIS_3)
-					self.wndPopupDialog.Open()
-				elif player.GetEnvanter() < 4:
-					envanter = 2
-				elif player.GetEnvanter() > 3 and player.GetEnvanter() < 6:
-					envanter = 3
-				elif player.GetEnvanter() > 5 and player.GetEnvanter() < 9:
-					envanter = 4
-				elif player.GetEnvanter() > 8 and player.GetEnvanter() < 12:
-					envanter = 5
-				elif player.GetEnvanter() > 11 and player.GetEnvanter() < 15:
-					envanter = 6
-				elif player.GetEnvanter() > 14 and player.GetEnvanter() < 18:
-					envanter = 7
-				self.questionDialog = uiCommon.QuestionDialog()
-				self.questionDialog.SetText(localeInfo.ENVANTER_GENIS_1 % envanter)
-				self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.genislet))
-				self.questionDialog.SetCancelEvent(ui.__mem_func__(self.OnCloseQuestionDialog))
-				self.questionDialog.Open()
-				self.questionDialog.slotIndex = slotIndex
+				self.en_ac()
