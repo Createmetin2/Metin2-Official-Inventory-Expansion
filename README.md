@@ -2,8 +2,6 @@
 # Game Version:16.0
 # Created by:Blackdragonx61
 # Date of First Version: 15.01.2017
-
-If you see any bug:
 # Skype:blackdragonx61
 ####
 10.02.2017
@@ -42,7 +40,6 @@ CPU overload->Fixed
 21.04.2018
 Exchange bug fixed
 -----------
-Shared Forums:
 # Turkmmo.com/c-c-python
 # Metin2DEV
 # Elitpvp
