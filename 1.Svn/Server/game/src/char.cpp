@@ -73,7 +73,7 @@ bool CHARACTER::Update_Inven()
 	else
 	{
 		int nekadar = needkey - CountSpecifyItem(key2);
-		ChatPacket(CHAT_TYPE_COMMAND, "update_envanter_needkey %d", nekadar);
+		ChatPacket(CHAT_TYPE_COMMAND, "update_envanter_lazim %d", nekadar);
 		return false;
 	}
 	PointChange(POINT_INVEN, 1, false);
