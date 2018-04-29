@@ -1,4 +1,6 @@
-ENVANTER_ANAH_LAZIM	envanter geniþletmesine daha ihtiyacýn var.
-ENVANTER_UYARI	Pazar açýkken envanter geniþletemezsiniz.
-ENVANTER_GENIS_1	Envanterini %s envanter geniþletmesiyle büyütmek mi istiyorsun?
-ENVANTER_ZATEN_GENIS_3	Zaten Bütün Envanterler Geniþletilmiþ.
+ENVANTER_ANAH_LAZIM	%d anahtara daha ihtiyacÄ±n var.
+ENVANTER_GENIS_1	Envanterini %s anahtarla geniÅŸletmek istiyor musun?
+
+English:
+ENVANTER_ANAH_LAZIM	You need %d more keys
+ENVANTER_GENIS_1	Do you want to expand your inventory with %s keys?
