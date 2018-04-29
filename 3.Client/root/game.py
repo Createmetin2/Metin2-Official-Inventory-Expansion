@@ -12,5 +12,5 @@
 				
 		def Update_inventory_lazim(self, lazim):
 			self.wndPopupDialog = uiCommon.PopupDialog()
-			self.wndPopupDialog.SetText(lazim + " " + localeInfo.ENVANTER_ANAH_LAZIM)
+			self.wndPopupDialog.SetText(localeInfo.ENVANTER_ANAH_LAZIM % lazim)
 			self.wndPopupDialog.Open()
