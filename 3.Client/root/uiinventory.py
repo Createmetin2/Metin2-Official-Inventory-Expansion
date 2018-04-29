@@ -86,12 +86,13 @@
 			self.OnCloseQuestionDialog()
 			
 		def en_ac(self):
-			needkeys = (2,2,2,2,3,3,4,4,4,5,5,5,6,6,6,7,7,7)
-			self.questionDialog = uiCommon.QuestionDialog()
-			self.questionDialog.SetText(localeInfo.ENVANTER_GENIS_1 % needkeys[player.GetEnvanter()])
-			self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.genislet))
-			self.questionDialog.SetCancelEvent(ui.__mem_func__(self.OnCloseQuestionDialog))
-			self.questionDialog.Open()
+			if player.GetEnvanter() < 18:
+				needkeys = (2,2,2,2,3,3,4,4,4,5,5,5,6,6,6,7,7,7)
+				self.questionDialog = uiCommon.QuestionDialog()
+				self.questionDialog.SetText(localeInfo.ENVANTER_GENIS_1 % needkeys[player.GetEnvanter()])
+				self.questionDialog.SetAcceptEvent(ui.__mem_func__(self.genislet))
+				self.questionDialog.SetCancelEvent(ui.__mem_func__(self.OnCloseQuestionDialog))
+				self.questionDialog.Open()
 	
 	def SetInventoryPage(self, page):	
 		self.inventoryPageIndex = page
