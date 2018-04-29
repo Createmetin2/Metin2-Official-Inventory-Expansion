@@ -79,9 +79,6 @@
 					self.EX_INVEN_COVER_IMG_CLOSE[i].Hide()
 					
 		def genislet(self):
-			if uiPrivateShopBuilder.IsBuildingPrivateShop():
-				chat.AppendChat(chat.CHAT_TYPE_INFO, localeInfo.ENVANTER_UYARI)
-				return
 			net.Envanter_genislet()
 			self.OnCloseQuestionDialog()
 			
