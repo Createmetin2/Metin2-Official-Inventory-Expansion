@@ -65,10 +65,10 @@ bool CExchange::CheckSpace()
             } if (!bExistEmptySpace) return false;
         }
 		else {
-			for (auto i = 0; i < s_grid.size(); i++) {
-				int iPos = s_grid[i]->FindBlank(1, item->GetSize());
+			for (auto &i : s_grid) {
+				int iPos = i->FindBlank(1, item->GetSize());
 				if (iPos >= 0) {
-					s_grid[i]->Put(iPos, 1, item->GetSize());
+					i->Put(iPos, 1, item->GetSize());
 					existspace = true;
 					break;
 			}} if (!existspace) return false;
