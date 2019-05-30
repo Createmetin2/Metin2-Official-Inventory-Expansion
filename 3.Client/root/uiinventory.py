@@ -134,6 +134,6 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 		item.SelectItem(ItemVNum)
 		
 #Add
-		if app.app.ENABLE_EXTEND_INVEN_SYSTEM:	
+		if app.ENABLE_EXTEND_INVEN_SYSTEM:	
 			if ItemVNum == self.INVENTORY_OPEN_KEY_VNUM:
 				self.__ClickExtendInvenButton(player.GetEnvanter() + 1)
