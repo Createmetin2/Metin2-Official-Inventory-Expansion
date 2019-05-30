@@ -1,45 +1,9 @@
 # Metin2-Official-Inventory-Expansion
-# Game Version:16.0
-# Created by:Blackdragonx61
-# Date of First Version: 15.01.2017
-# Skype:blackdragonx61
-####
-10.02.2017
-Wanted keys edited
------------
-11.03.2017
-Pick-item, bug -> Fixed
------------
-11.03.2017
-/item vnum, bug -> Fixed
------------
-11.03.2017
-GetEmptyInventory -> Fixed
------------
-11.03.2017
-IsEmptyItemGrid -> Fixed
------------
-13.03.2017
-Trade, bug -> Fixed
------------
-14.04.2017
-First key deactivated(vnum:72319)
------------
-04.01.2018
-Deleted and changed largest python codes
------------
-04.01.2018
-Updated char.cpp
------------
-06.01.2018
-char.cpp/char.h/..tables.h/clientmanagerplayer.cpp
------------
-06.01.2018
-CPU overload->Fixed
------------
-21.04.2018
-Exchange bug fixed
------------
-# Turkmmo.com/c-c-python
-# Metin2DEV
-# Elitpvp
+
+| First Release Date | Final Version | Created by     |
+|--------------------|:-------------:|----------------|
+| 15.01.2017         |   30.05.2019  | blackdragonx61 |
+
+| VIDEO-1                                                                                                                     |                                                           VIDEO-2                                                           | GIF                                                                                                                                                         |
+|-----------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [![Watch the video](https://img.youtube.com/vi/nfkcRiY8P8E/maxresdefault.jpg)](https://www.youtube.com/watch?v=nfkcRiY8P8E) | [![Watch the video](https://img.youtube.com/vi/d-_ixSNSXuM/maxresdefault.jpg)](https://www.youtube.com/watch?v=d-_ixSNSXuM) | ![Alt Text](https://s3.gifyu.com/images/sourcec051cf00b928b96c.gif) |
