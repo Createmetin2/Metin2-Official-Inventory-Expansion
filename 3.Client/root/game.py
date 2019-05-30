@@ -1,16 +1,11 @@
-	#Find
-				"DayMode"				: self.__DayMode_Update,
-	#Add
-				"refreshinven"            : self.Update_inventory_ref,
-				"update_envanter_lazim"   : self.Update_inventory_lazim,
+#Find
+		self.serverCommander=stringCommander.Analyzer()
+#Add
+		if app.ENABLE_EXTEND_INVEN_SYSTEM:
+			self.serverCommander.SAFE_RegisterCallBack("ExInvenItemUseMsg", self.ExInvenItemUseMsg)	
 
 #Add end of file
 	if app.ENABLE_EXTEND_INVEN_SYSTEM:	
-		def Update_inventory_ref(self):
+		def ExInvenItemUseMsg(self, enough_count):
 			if self.interface:
-				self.interface.SetInventoryPageKilit()
-				
-		def Update_inventory_lazim(self, lazim):
-			self.wndPopupDialog = uiCommon.PopupDialog()
-			self.wndPopupDialog.SetText(localeInfo.ENVANTER_ANAH_LAZIM % lazim)
-			self.wndPopupDialog.Open()
+				self.interface.ExInvenItemUseMsg(enough_count)

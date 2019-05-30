@@ -1,8 +1,8 @@
 //Find
-#ifdef ENABLE_COSTUME_WEAPON_SYSTEM
-	PyModule_AddIntConstant(poModule, "ENABLE_COSTUME_WEAPON_SYSTEM", 1);
+#ifdef ENABLE_COSTUME_SYSTEM
+	PyModule_AddIntConstant(poModule, "ENABLE_COSTUME_SYSTEM", 1);
 #else
-	PyModule_AddIntConstant(poModule, "ENABLE_COSTUME_WEAPON_SYSTEM", 0);
+	PyModule_AddIntConstant(poModule, "ENABLE_COSTUME_SYSTEM", 0);
 #endif
 
 ///Add

@@ -48,9 +48,9 @@
 		case POINT_INVEN:
 			{
 				const int64_t Envantertoplami = static_cast<int64_t>(Inven_Point()) + static_cast<int64_t>(amount);
-				if (Envantertoplami > 18)
+				if (Envantertoplami > INVENTORY_LOCK_COVER_COUNT)
 				{
-					sys_err("[ENVANTER SINIRI HATASI]");
+					sys_err("[POINT_INVEN ERROR]");
 					return;
 				}
 				Set_Inventory_Point(Inven_Point() + amount);
@@ -61,23 +61,22 @@
 
 ///Add end of cpp
 #ifdef ENABLE_EXTEND_INVEN_SYSTEM
-static int NeedKeys[] = {2,2,2,2,3,3,4,4,4,5,5,5,6,6,6,7,7,7};
 bool CHARACTER::Update_Inven()
 {
-	// #define key1 72319
-	#define key2 72320
-	int needkey = NeedKeys[Inven_Point()];
-	
-	if (CountSpecifyItem(key2) >= needkey)
-		RemoveSpecifyItem(key2, needkey);
+	std::vector<int> needkeys;
+	for (int i = 2; i <= (INVENTORY_LOCKED_PAGE_COUNT*3)+1; i++)
+		for (int j = 0; j < 3; j++)
+			needkeys.push_back(i);	
+	int needkey = needkeys[Inven_Point()];
+	if (CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM) >= needkey)
+		RemoveSpecifyItem(INVENTORY_OPEN_KEY_VNUM, needkey);
 	else
 	{
-		int nekadar = needkey - CountSpecifyItem(key2);
-		ChatPacket(CHAT_TYPE_COMMAND, "update_envanter_lazim %d", nekadar);
+		int nekadar = needkey - CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM);
+		ChatPacket(CHAT_TYPE_COMMAND, "ExInvenItemUseMsg %d", nekadar);
 		return false;
 	}
 	PointChange(POINT_INVEN, 1, false);
-	ChatPacket(CHAT_TYPE_COMMAND, "refreshinven");
 	UpdatePacket();		
 	return true;
 }

@@ -21,7 +21,7 @@
 ///Add
 #ifdef ENABLE_EXTEND_INVEN_SYSTEM
 		INT				Inven_Point() const			{ return m_points.envanter; }
-		INT				Inventory_Size() const			{ return 90 + (5*Inven_Point()); }
+		INT				Inventory_Size() const			{ return INVENTORY_OPEN_PAGE_SIZE + (INVENTORY_WIDTH*Inven_Point()); }
 		void			Set_Inventory_Point(INT black)	{ m_points.envanter = black; }
 		bool            Update_Inven();
 #endif

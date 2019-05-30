@@ -5,60 +5,47 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 
 bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) const
 {
-	#ifdef ENABLE_EXTEND_INVEN_SYSTEM
+#ifdef ENABLE_EXTEND_INVEN_SYSTEM
 	switch (Cell.window_type)
 	{
 	case INVENTORY:
 		{
 			BYTE bCell = Cell.cell;
-
-			// bItemCell은 0이 false임을 나타내기 위해 + 1 해서 처리한다.
-			// 따라서 iExceptionCell에 1을 더해 비교한다.
 			++iExceptionCell;
 
 			if (Cell.IsBeltInventoryPosition())
 			{
 				LPITEM beltItem = GetWear(WEAR_BELT);
-
 				if (NULL == beltItem)
 					return false;
-
 				if (false == CBeltInventoryHelper::IsAvailableCell(bCell - BELT_INVENTORY_SLOT_START, beltItem->GetValue(0)))
 					return false;
-
-				if (m_pointsInstant.bItemGrid[bCell])
-				{
+				if (m_pointsInstant.bItemGrid[bCell]) {
 					if (m_pointsInstant.bItemGrid[bCell] == iExceptionCell)
 						return true;
-
 					return false;
 				}
-
 				if (bSize == 1)
 					return true;
-
 			}
 			//black
 			else if (bCell >= Inventory_Size())
 				return false;
 
-			if (m_pointsInstant.bItemGrid[bCell])
-			{
-				if (m_pointsInstant.bItemGrid[bCell] == iExceptionCell)
-				{
+			if (m_pointsInstant.bItemGrid[bCell]) {
+				if (m_pointsInstant.bItemGrid[bCell] == iExceptionCell) {
 					if (bSize == 1)
 						return true;
 
 					int j = 1;
-					BYTE bPage = bCell / (INVENTORY_MAX_NUM / 4);
-					do
-					{
+					BYTE bPage = bCell / (INVENTORY_PAGE_SIZE);
+					do {
 						BYTE p = bCell + (5 * j);
 
 						if (p >= Inventory_Size())
 							return false;
 
-						if (p / (INVENTORY_MAX_NUM / 4) != bPage)
+						if (p / (INVENTORY_PAGE_SIZE) != bPage)
 							return false;
 
 						if (m_pointsInstant.bItemGrid[p])
@@ -66,41 +53,32 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 								return false;
 					}
 					while (++j < bSize);
-
 					return true;
-				}
-				else
+				} else
 					return false;
 			}
-
-			// 크기가 1이면 한칸을 차지하는 것이므로 그냥 리턴
 			if (1 == bSize)
 				return true;
-			else
-			{
+			else {
 				int j = 1;
-				BYTE bPage = bCell / (INVENTORY_MAX_NUM / 4);
+				BYTE bPage = bCell / (INVENTORY_PAGE_SIZE);
 
-				do
-				{
+				do {
 					BYTE p = bCell + (5 * j);
 
 					if (p >= Inventory_Size())
 						return false;
-					if (p / (INVENTORY_MAX_NUM / 4) != bPage)
+					if (p / (INVENTORY_PAGE_SIZE) != bPage)
 						return false;
 
 					if (m_pointsInstant.bItemGrid[p])
 						if (m_pointsInstant.bItemGrid[p] != iExceptionCell)
 							return false;
-				}
-				while (++j < bSize);
-
+				} while (++j < bSize);
 				return true;
 			}
-		}
-		break;
-	#else
+		} break;
+#else
 		switch (Cell.window_type)
 		{
 		case INVENTORY:
@@ -145,7 +123,7 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 							return true;
 
 						int j = 1;
-						BYTE bPage = bCell / (INVENTORY_MAX_NUM / 4);
+						BYTE bPage = bCell / (INVENTORY_MAX_NUM / 2);
 
 						do
 						{
@@ -154,7 +132,7 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 							if (p >= INVENTORY_MAX_NUM)
 								return false;
 
-							if (p / (INVENTORY_MAX_NUM / 4) != bPage)
+							if (p / (INVENTORY_MAX_NUM / 2) != bPage)
 								return false;
 
 							if (m_pointsInstant.bItemGrid[p])
@@ -175,7 +153,7 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 				else
 				{
 					int j = 1;
-					BYTE bPage = bCell / (INVENTORY_MAX_NUM / 4);
+					BYTE bPage = bCell / (INVENTORY_MAX_NUM / 2);
 
 					do
 					{
@@ -183,7 +161,7 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 
 						if (p >= INVENTORY_MAX_NUM)
 							return false;
-						if (p / (INVENTORY_MAX_NUM / 4) != bPage)
+						if (p / (INVENTORY_MAX_NUM / 2) != bPage)
 							return false;
 
 						if (m_pointsInstant.bItemGrid[p])
@@ -196,7 +174,7 @@ bool CHARACTER::IsEmptyItemGrid(TItemPos Cell, BYTE bSize, int iExceptionCell) c
 				}
 			}
 			break;
-	#endif
+#endif
 	case DRAGON_SOUL_INVENTORY:
 		{
 			WORD wCell = Cell.cell;
