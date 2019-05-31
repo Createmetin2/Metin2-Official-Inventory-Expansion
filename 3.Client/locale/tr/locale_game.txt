@@ -1,6 +1,0 @@
-ENVANTER_ANAH_LAZIM	%d anahtara daha ihtiyacın var.
-ENVANTER_GENIS_1	Envanterini %s anahtarla genişletmek istiyor musun?
-
-English:
-ENVANTER_ANAH_LAZIM	You need %d more keys
-ENVANTER_GENIS_1	Do you want to expand your inventory with %s keys?
