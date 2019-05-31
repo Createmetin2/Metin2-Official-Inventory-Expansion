@@ -8,4 +8,4 @@
 |---------|:---------------------------------------------------------------------------------------------------------------------------:|
 |    [![](https://img.youtube.com/vi/nfkcRiY8P8E/maxresdefault.jpg)](https://youtu.be/nfkcRiY8P8E)     | [![](https://img.youtube.com/vi/d-_ixSNSXuM/maxresdefault.jpg)](https://www.youtube.com/watch?v=d-_ixSNSXuM) |
 
-![Alt Text](https://thumbs.gfycat.com/WillingArtisticBlacknorwegianelkhound.webp)
+![](https://thumbs.gfycat.com/WillingArtisticBlacknorwegianelkhound.webp)
