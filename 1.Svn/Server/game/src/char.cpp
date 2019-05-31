@@ -83,7 +83,6 @@ bool CHARACTER::Update_Inven()
 		return false;
 	}
 	PointChange(POINT_INVEN, 1, false);
-	UpdatePacket();
 	return true;
 }
 #endif
