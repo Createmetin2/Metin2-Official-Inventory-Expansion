@@ -9,8 +9,14 @@ enum ESex
 #ifdef ENABLE_EXTEND_INVEN_SYSTEM
 enum EInventory
 {
-	INVENTORY_OPEN_PAGE_COUNT = 2,//you can change
-	INVENTORY_OPEN_KEY_VNUM = 72320,//you can change
+	/* you can change */
+	INVENTORY_OPEN_PAGE_COUNT = 2,
+	INVENTORY_OPEN_KEY_VNUM = 72319,
+	INVENTORY_OPEN_KEY_VNUM2 = 72320,
+	INVENTORY_START_DELETE_VNUM = INVENTORY_OPEN_KEY_VNUM, // start deleting from a tradeable item
+	INVENTORY_NEED_KEY_START = 2,
+	INVENTORY_NEED_KEY_INCREASE = 3, // Increase the number of keys in each 3 stages. you can change
+	/* end */
 	INVENTORY_WIDTH = 5,
 	INVENTORY_HEIGHT = 9,
 	INVENTORY_PAGE_SIZE = INVENTORY_WIDTH*INVENTORY_HEIGHT,

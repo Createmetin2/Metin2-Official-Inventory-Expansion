@@ -11,9 +11,6 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 		
 #Add
 			if app.ENABLE_EXTEND_INVEN_SYSTEM:
-				self.default_open_inven = 2
-				self.INVENTORY_OPEN_KEY_VNUM = 72320
-				self.locked_inven = len(self.inventoryTab)-self.default_open_inven
 				self.__CreateExtendInvenButton()
 				self.ExInvenQuestionDlg = uiCommon.QuestionDialog()
 				self.ExInvenQuestionDlg.Close()
@@ -42,7 +39,7 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 			start_x		= 8
 			start_y		= 246
 			img_height	= 32
-			for button_index in range(self.locked_inven*9):
+			for button_index in range(player.INVENTORY_LOCKED_PAGE_COUNT*9):
 				ex_inven_button = ui.Button()			
 				increase_y	= img_height * (button_index % 9)
 				ex_inven_button.SetParent(parent)
@@ -56,9 +53,9 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 				self.ExInvenButton.append(ex_inven_button)
 				
 		def __ClickExtendInvenButton(self, index):
-			if index == player.GetEnvanter() + 1:
+			if index == player.GetExtendInvenStage() + 1:
 				needkeys = []
-				for n in range(2, (self.locked_inven*3)+2):
+				for n in range(player.INVENTORY_NEED_KEY_START, (player.INVENTORY_LOCKED_PAGE_COUNT*player.INVENTORY_NEED_KEY_INCREASE)+2):
 					for i in range(3):
 						needkeys.append(n)
 				if self.ExInvenQuestionDlg:
@@ -74,10 +71,10 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 			for index in range( len(self.ExInvenButton) ):
 				self.ExInvenButton[index].Hide()				
 		def __ShowExtendInvenButton(self, cur_stage):
-			if self.inventoryPageIndex < self.default_open_inven:
+			if self.inventoryPageIndex < player.INVENTORY_OPEN_PAGE_COUNT:
 				return
-			count = (self.locked_inven*9) / self.locked_inven
-			min_range = (self.inventoryPageIndex - self.default_open_inven) * count
+			count = 9
+			min_range = (self.inventoryPageIndex - player.INVENTORY_OPEN_PAGE_COUNT) * count
 			max_range = min_range + count		
 			for button_index in range(min_range, max_range):
 				if button_index == cur_stage:
@@ -90,9 +87,8 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 				else:
 					self.ExInvenButton[button_index].Show()
 		def __RefreshExinvenCoverSlot(self):	
-			cur_stage = player.GetEnvanter()
 			self.__HideAllExtendInvenButton()
-			self.__ShowExtendInvenButton(cur_stage)
+			self.__ShowExtendInvenButton(player.GetExtendInvenStage())
 		def __AcceptExInvenItemUse(self):
 			net.Envanter_genislet()
 			self.ExInvenQuestionDlg.Close()		
@@ -134,6 +130,5 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 		item.SelectItem(ItemVNum)
 		
 #Add
-		if app.ENABLE_EXTEND_INVEN_SYSTEM:	
-			if ItemVNum == self.INVENTORY_OPEN_KEY_VNUM:
-				self.__ClickExtendInvenButton(player.GetEnvanter() + 1)
+		if player.IsExtendInvenKey(ItemVNum) and app.ENABLE_EXTEND_INVEN_SYSTEM:
+			self.__ClickExtendInvenButton(player.GetExtendInvenStage() + 1)

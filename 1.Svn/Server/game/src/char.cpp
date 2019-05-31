@@ -64,20 +64,26 @@
 bool CHARACTER::Update_Inven()
 {
 	std::vector<int> needkeys;
-	for (int i = 2; i <= (INVENTORY_LOCKED_PAGE_COUNT*3)+1; i++)
+	for (int i = INVENTORY_NEED_KEY_START; i <= (INVENTORY_LOCKED_PAGE_COUNT*INVENTORY_NEED_KEY_INCREASE)+1; i++)
 		for (int j = 0; j < 3; j++)
-			needkeys.push_back(i);	
+			needkeys.push_back(i);
 	int needkey = needkeys[Inven_Point()];
-	if (CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM) >= needkey)
-		RemoveSpecifyItem(INVENTORY_OPEN_KEY_VNUM, needkey);
-	else
-	{
-		int nekadar = needkey - CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM);
-		ChatPacket(CHAT_TYPE_COMMAND, "ExInvenItemUseMsg %d", nekadar);
+	int keycount = CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM) + CountSpecifyItem(INVENTORY_OPEN_KEY_VNUM2);
+	if (keycount >= needkey) {
+		int willdelete = INVENTORY_START_DELETE_VNUM;
+		while (needkey) {
+			if (!CountSpecifyItem(willdelete))
+				willdelete = INVENTORY_OPEN_KEY_VNUM2;
+			RemoveSpecifyItem(willdelete);
+			needkey--;
+		}
+	}	
+	else {
+		ChatPacket(CHAT_TYPE_COMMAND, "ExInvenItemUseMsg %d", needkey - keycount);
 		return false;
 	}
 	PointChange(POINT_INVEN, 1, false);
-	UpdatePacket();		
+	UpdatePacket();
 	return true;
 }
 #endif
