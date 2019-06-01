@@ -73,7 +73,7 @@ bool CHARACTER::Update_Inven()
 		int willdelete = INVENTORY_START_DELETE_VNUM;
 		while (needkey) {
 			if (!CountSpecifyItem(willdelete))
-				willdelete = INVENTORY_OPEN_KEY_VNUM2;
+				willdelete = INVENTORY_START_DELETE_VNUM == INVENTORY_OPEN_KEY_VNUM ? INVENTORY_OPEN_KEY_VNUM2 : INVENTORY_OPEN_KEY_VNUM;
 			RemoveSpecifyItem(willdelete);
 			needkey--;
 		}
