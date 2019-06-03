@@ -14,14 +14,10 @@ bool CExchange::CheckSpace()
     int new_size, invenpoint = GetCompany()->GetOwner()->Inven_Point();
 	
 	for (size_t i = 0; i < s_grid.size(); i++) {
-		if (i < INVENTORY_OPEN_PAGE_COUNT) {
-			s_grid[i] = new CGrid(INVENTORY_WIDTH,INVENTORY_HEIGHT);
-			continue;
-		}
-        if (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
-            new_size = invenpoint;
-        else if (invenpoint >= INVENTORY_HEIGHT)
+        if (invenpoint > INVENTORY_HEIGHT || i < INVENTORY_OPEN_PAGE_COUNT)
             new_size = INVENTORY_HEIGHT;
+	elseif (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
+            new_size = invenpoint;
         else
             new_size = 0;
         s_grid[i] = new CGrid(INVENTORY_WIDTH,new_size);
