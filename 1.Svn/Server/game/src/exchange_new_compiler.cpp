@@ -9,14 +9,14 @@ bool CExchange::CheckSpace()
 {	
 	std::array<CGrid*, static_cast<const int>(INVENTORY_PAGE_COUNT)> s_grid;
 	static std::vector <WORD> s_vDSGrid(DRAGON_SOUL_INVENTORY_MAX_NUM);
-    LPITEM item;
+    	LPITEM item;
 	bool bDSInitialized, existspace = false;
-    int new_size, invenpoint = GetCompany()->GetOwner()->Inven_Point();
+    	int new_size, invenpoint = GetCompany()->GetOwner()->Inven_Point();
 	
 	for (size_t i = 0; i < s_grid.size(); i++) {
         if (invenpoint > INVENTORY_HEIGHT || i < INVENTORY_OPEN_PAGE_COUNT)
             new_size = INVENTORY_HEIGHT;
-	elseif (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
+	else if (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
             new_size = invenpoint;
         else
             new_size = 0;
