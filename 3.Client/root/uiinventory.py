@@ -48,25 +48,25 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 				ex_inven_button.SetOverVisual(EX_INVEN_COVER_IMG_CLOSE)
 				ex_inven_button.SetDownVisual(EX_INVEN_COVER_IMG_CLOSE)
 				ex_inven_button.SetDisableVisual(EX_INVEN_COVER_IMG_CLOSE)
-				ex_inven_button.SetEvent(ui.__mem_func__(self.__ClickExtendInvenButton), button_index + 1 )
+				ex_inven_button.SetEvent(ui.__mem_func__(self.__ClickExtendInvenButton), button_index)
 				ex_inven_button.Hide()
 				self.ExInvenButton.append(ex_inven_button)
 				
 		def __ClickExtendInvenButton(self, index):
-			if index == player.GetExtendInvenStage() + 1:
+			if index >= len(self.ExInvenButton):
+				self.__OpenExInvenMsgDlg(localeInfo.EXINVEN_USE_ITEM_FAIL_FOURTH_PAGE_STAGE_MAX)
+				return
+			if self.ExInvenQuestionDlg and index == player.GetExtendInvenStage():
 				needkeys = []
 				for n in range(player.INVENTORY_NEED_KEY_START, (player.INVENTORY_LOCKED_PAGE_COUNT*player.INVENTORY_NEED_KEY_INCREASE)+2):
 					for i in range(3):
 						needkeys.append(n)
-				if self.ExInvenQuestionDlg:
-					self.ExInvenQuestionDlg.SetText(localeInfo.EXINVEN_USE_ITEM_QUESTION % needkeys[index-1])
-					self.ExInvenQuestionDlg.SetAcceptEvent(ui.__mem_func__(self.__AcceptExInvenItemUse))
-					self.ExInvenQuestionDlg.SetCancelEvent(ui.__mem_func__(self.__CancelExInvenItemUse))
-					w,h = self.ExInvenQuestionDlg.GetTextSize()
-					self.ExInvenQuestionDlg.SetWidth( w + 40 )
-					self.ExInvenQuestionDlg.Open()
-			else:
-				self.__OpenExInvenMsgDlg(localeInfo.EXINVEN_USE_ITEM_FAIL_FOURTH_PAGE_STAGE_MAX)
+				self.ExInvenQuestionDlg.SetText(localeInfo.EXINVEN_USE_ITEM_QUESTION % needkeys[index])
+				self.ExInvenQuestionDlg.SetAcceptEvent(ui.__mem_func__(self.__AcceptExInvenItemUse))
+				self.ExInvenQuestionDlg.SetCancelEvent(ui.__mem_func__(self.__CancelExInvenItemUse))
+				w,h = self.ExInvenQuestionDlg.GetTextSize()
+				self.ExInvenQuestionDlg.SetWidth( w + 40 )
+				self.ExInvenQuestionDlg.Open()
 		def __HideAllExtendInvenButton(self):		
 			for index in range( len(self.ExInvenButton) ):
 				self.ExInvenButton[index].Hide()				
@@ -100,10 +100,6 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 			popup.SetAcceptEvent(self.__OnClosePopupDialog)
 			w,h = popup.GetTextSize()
 			popup.SetWidth( w + 40 )
-			line_count = popup.GetTextLineCount()	
-			if line_count > 1:
-				height = popup.GetLineHeight()
-				popup.SetLineHeight(height + 3)		
 			popup.Open()
 			if self.pop:
 				self.pop.Destroy()			
@@ -131,4 +127,4 @@ if app.ENABLE_EXTEND_INVEN_SYSTEM:
 		
 #Add
 		if player.IsExtendInvenKey(ItemVNum) and app.ENABLE_EXTEND_INVEN_SYSTEM:
-			self.__ClickExtendInvenButton(player.GetExtendInvenStage() + 1)
+			self.__ClickExtendInvenButton(player.GetExtendInvenStage())
