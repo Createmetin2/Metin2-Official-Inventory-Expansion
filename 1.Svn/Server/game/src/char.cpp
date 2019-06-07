@@ -63,6 +63,7 @@
 #ifdef ENABLE_EXTEND_INVEN_SYSTEM
 bool CHARACTER::Update_Inven()
 {
+	if (Inven_Point() >= INVENTORY_LOCK_COVER_COUNT) return false;
 	std::vector<int> needkeys;
 	for (int i = INVENTORY_NEED_KEY_START; i <= (INVENTORY_LOCKED_PAGE_COUNT*INVENTORY_NEED_KEY_INCREASE)+1; i++)
 		for (int j = 0; j < 3; j++)
