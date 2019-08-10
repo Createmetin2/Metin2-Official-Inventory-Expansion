@@ -7,7 +7,7 @@ bool CExchange::CheckSpace()
 #ifdef ENABLE_EXTEND_INVEN_SYSTEM
 bool CExchange::CheckSpace()
 {	
-	std::array<CGrid*, static_cast<const int>(INVENTORY_PAGE_COUNT)> s_grid;
+	std::array<std::unique_ptr<CGrid>, static_cast<const int>(INVENTORY_PAGE_COUNT)> s_grid;
 	static std::vector <WORD> s_vDSGrid(DRAGON_SOUL_INVENTORY_MAX_NUM);
     	LPITEM item;
 	bool bDSInitialized, existspace = false;
@@ -20,7 +20,7 @@ bool CExchange::CheckSpace()
 		    new_size = invenpoint;
 		else
 		    new_size = 0;
-		s_grid[i] = new CGrid(INVENTORY_WIDTH,new_size);
+		s_grid[i] = std::make_unique<CGrid>(INVENTORY_WIDTH,new_size);
 		invenpoint -= INVENTORY_HEIGHT;
 	}
 	for (size_t j = 0; j < s_grid.size(); j++) {
