@@ -71,6 +71,9 @@ bool CExchange::CheckSpace()
 					break;
 			}} if (!existspace) return false;
 		}}
+	for (int i = 0; i < INVENTORY_PAGE_COUNT; i++)
+		if (s_grid[i])
+			delete s_grid[i];
 	return true;
 }
 #else
