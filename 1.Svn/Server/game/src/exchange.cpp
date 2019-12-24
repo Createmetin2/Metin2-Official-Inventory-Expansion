@@ -29,17 +29,23 @@ bool CExchange::CheckSpace()
 	}
 	for (size_t j = 0; j < s_grid.size(); j++) {
 		s_grid[j]->Clear();
-		for (auto i = INVENTORY_PAGE_SIZE * j; i < INVENTORY_PAGE_SIZE * (j+1); ++i) {
+		for (auto i = INVENTORY_PAGE_SIZE * j; i < INVENTORY_PAGE_SIZE * (j+1); ++i) 
+		{
     		if (!(item = GetCompany()->GetOwner()->GetInventoryItem(i))) 
     		    continue;
     		s_grid[j]->Put(i - INVENTORY_PAGE_SIZE * j, 1, item->GetSize());
 		}
 	}
-	for (auto i = 0; i < EXCHANGE_ITEM_MAX_NUM; ++i) {
-		if (!(item = m_apItems[i])) continue;
-		if (item->IsDragonSoul()) {
-            if (!GetCompany()->GetOwner()->DragonSoul_IsQualified()) return false;
-            if (!bDSInitialized) {
+	for (auto i = 0; i < EXCHANGE_ITEM_MAX_NUM; ++i) 
+	{
+		if (!(item = m_apItems[i])) 
+			continue;
+		if (item->IsDragonSoul()) 
+		{
+            if (!GetCompany()->GetOwner()->DragonSoul_IsQualified()) 
+				return false;
+            if (!bDSInitialized) 
+			{
                 bDSInitialized = true;
                 GetCompany()->GetOwner()->CopyDragonSoulItemGrid(s_vDSGrid);
             }
@@ -48,36 +54,47 @@ bool CExchange::CheckSpace()
             if (wBasePos >= DRAGON_SOUL_INVENTORY_MAX_NUM) return false;
             for (int i = 0; i < DRAGON_SOUL_BOX_SIZE; i++) {
                 WORD wPos = wBasePos + i;
-                if (0 == s_vDSGrid[wBasePos]) {
-                    bool bEmpty = true;
-                    for (int j = 1; j < item->GetSize(); j++)	{
-                        if (s_vDSGrid[wPos + j * DRAGON_SOUL_BOX_COLUMN_NUM]) {
-                            bEmpty = false;
-                            break;
-                    }} if (bEmpty)	{
-                        for (int j = 0; j < item->GetSize(); j++)
-                            s_vDSGrid[wPos + j * DRAGON_SOUL_BOX_COLUMN_NUM] =  wPos + 1;
-                        bExistEmptySpace = true;
-                        break;
-                    }} if (bExistEmptySpace) break;
-            } if (!bExistEmptySpace) return false;
+                if (0 == s_vDSGrid[wBasePos]) 
+				{
+					bool bEmpty = true;
+					for (int j = 1; j < item->GetSize(); j++)	
+					{
+						if (s_vDSGrid[wPos + j * DRAGON_SOUL_BOX_COLUMN_NUM]) 
+						{
+							bEmpty = false;
+							break;
+						}
+					} 
+					if (bEmpty)	
+					{
+						for (int j = 0; j < item->GetSize(); j++)
+							s_vDSGrid[wPos + j * DRAGON_SOUL_BOX_COLUMN_NUM] =  wPos + 1;
+						bExistEmptySpace = true;
+						break;
+					}
+				}
+				if (bExistEmptySpace) 
+					break;
+            } 
+			if (!bExistEmptySpace) 
+				return false;
         }
-		else {
+		else 
+		{
 			bool existspace = false;
-			for (size_t i = 0; i < s_grid.size(); i++) {
-				int iPos = s_grid[i]->FindBlank(1, item->GetSize());
+			for (size_t i = 0; i < s_grid.size(); i++) 
+			{
+				const auto& iPos = s_grid[i]->FindBlank(1, item->GetSize());
 				if (iPos >= 0) {
 					s_grid[i]->Put(iPos, 1, item->GetSize());
 					existspace = true;
 					break;
 				}
-				else
-					if (i == s_grid.size() -1)
-						return false;
 			}
-			if (existspace)
-				continue;
-		}}
+			if (!existspace)
+				return false;
+		}
+	}
 	return true;
 }
 #else
