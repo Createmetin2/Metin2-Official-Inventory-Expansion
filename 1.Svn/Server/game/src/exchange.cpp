@@ -9,31 +9,31 @@ bool CExchange::CheckSpace()
 {	
 	std::array<std::unique_ptr<CGrid>, static_cast<const int>(INVENTORY_PAGE_COUNT)> s_grid;
 	static std::vector <WORD> s_vDSGrid(DRAGON_SOUL_INVENTORY_MAX_NUM);
-    LPITEM item;
+	LPITEM item;
 	bool bDSInitialized = false;
-    int new_size, invenpoint = GetCompany()->GetOwner()->Inven_Point();
+	int new_size, invenpoint = GetCompany()->GetOwner()->Inven_Point();
 
 	for (size_t i = 0; i < s_grid.size(); i++) {
 		if (i < INVENTORY_OPEN_PAGE_COUNT) {
 			s_grid[i] = std::make_unique<CGrid>(INVENTORY_WIDTH,INVENTORY_HEIGHT);
 			continue;
 		}
-        if (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
-            new_size = invenpoint;
-        else if (invenpoint >= INVENTORY_HEIGHT)
-            new_size = INVENTORY_HEIGHT;
-        else
-            new_size = 0;
-        s_grid[i] = std::make_unique<CGrid>(INVENTORY_WIDTH,new_size);
-        invenpoint -= INVENTORY_HEIGHT;
+		if (invenpoint > 0 && invenpoint <= INVENTORY_HEIGHT)
+			new_size = invenpoint;
+		else if (invenpoint >= INVENTORY_HEIGHT)
+			new_size = INVENTORY_HEIGHT;
+		else
+			new_size = 0;
+		s_grid[i] = std::make_unique<CGrid>(INVENTORY_WIDTH,new_size);
+		invenpoint -= INVENTORY_HEIGHT;
 	}
 	for (size_t j = 0; j < s_grid.size(); j++) {
 		s_grid[j]->Clear();
 		for (auto i = INVENTORY_PAGE_SIZE * j; i < INVENTORY_PAGE_SIZE * (j+1); ++i) 
 		{
-    		if (!(item = GetCompany()->GetOwner()->GetInventoryItem(i))) 
-    		    continue;
-    		s_grid[j]->Put(i - INVENTORY_PAGE_SIZE * j, 1, item->GetSize());
+			if (!(item = GetCompany()->GetOwner()->GetInventoryItem(i))) 
+				continue;
+			s_grid[j]->Put(i - INVENTORY_PAGE_SIZE * j, 1, item->GetSize());
 		}
 	}
 	for (auto i = 0; i < EXCHANGE_ITEM_MAX_NUM; ++i) 
@@ -42,19 +42,20 @@ bool CExchange::CheckSpace()
 			continue;
 		if (item->IsDragonSoul()) 
 		{
-            if (!GetCompany()->GetOwner()->DragonSoul_IsQualified()) 
+			if (!GetCompany()->GetOwner()->DragonSoul_IsQualified()) 
 				return false;
-            if (!bDSInitialized) 
+			if (!bDSInitialized) 
 			{
-                bDSInitialized = true;
-                GetCompany()->GetOwner()->CopyDragonSoulItemGrid(s_vDSGrid);
-            }
-            bool bExistEmptySpace = false;
-            WORD wBasePos = DSManager::instance().GetBasePosition(item);		
-            if (wBasePos >= DRAGON_SOUL_INVENTORY_MAX_NUM) return false;
-            for (int i = 0; i < DRAGON_SOUL_BOX_SIZE; i++) {
-                WORD wPos = wBasePos + i;
-                if (0 == s_vDSGrid[wBasePos]) 
+				bDSInitialized = true;
+				GetCompany()->GetOwner()->CopyDragonSoulItemGrid(s_vDSGrid);
+			}
+			bool bExistEmptySpace = false;
+			WORD wBasePos = DSManager::instance().GetBasePosition(item);
+			if (wBasePos >= DRAGON_SOUL_INVENTORY_MAX_NUM) 
+				return false;
+			for (int i = 0; i < DRAGON_SOUL_BOX_SIZE; i++) {
+				WORD wPos = wBasePos + i;
+				if (0 == s_vDSGrid[wBasePos]) 
 				{
 					bool bEmpty = true;
 					for (int j = 1; j < item->GetSize(); j++)	
@@ -78,7 +79,7 @@ bool CExchange::CheckSpace()
             } 
 			if (!bExistEmptySpace) 
 				return false;
-        }
+		}
 		else 
 		{
 			bool existspace = false;
